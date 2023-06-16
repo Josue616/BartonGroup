@@ -1,0 +1,17 @@
+/db-data/
+/php/src/vendor/
+*.log
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+php_errors.log
+*.php~
+/php/src/composer.json
+/php/src/composer.lock
