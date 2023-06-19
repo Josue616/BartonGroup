@@ -44,6 +44,19 @@ class Usuario {
     public function setPassword($password) {
         $this->password = $password;
     }
+    public function update() {
+        require_once '../../config/config.php';
+    
+        $conn = getConnection();
+        $stmt = $conn->prepare("UPDATE usuarios SET nombre = :nombre, email = :email WHERE dni = :dni");
+    
+        $stmt->bindParam(':nombre', $this->nombre);
+        $stmt->bindParam(':email', $this->email);
+        $stmt->bindParam(':dni', $this->dni);
+    
+        $stmt->execute();
+    }
+    
 
     public static function findByDNI($dni) {
         require_once '../../config/config.php';
@@ -61,7 +74,46 @@ class Usuario {
 
         return new Usuario($row['dni'], $row['nombre'], $row['email'], $row['password']);
     }
-
+    public static function findAll() {
+        require_once '../../config/config.php';
+    
+        $conn = getConnection();
+        $stmt = $conn->prepare("SELECT * FROM usuarios");
+        $stmt->execute();
+    
+        $usuarios = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $usuarios[] = new Usuario($row['dni'], $row['nombre'], $row['email'], $row['password']);
+        }
+    
+        return $usuarios;
+    }
+    public function getPrestamos() {
+        require_once '../../config/config.php';
+    
+        $conn = getConnection();
+        $stmt = $conn->prepare("SELECT * FROM prestamos WHERE dni_usuario = :dni");
+        $stmt->bindParam(':dni', $this->dni);
+        $stmt->execute();
+    
+        $prestamos = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $prestamos[] = $row;
+        }
+    
+        return $prestamos;
+    }
+    public static function deleteByDNI($dni) {
+        require_once '../../config/config.php';
+    
+        $conn = getConnection();
+        $stmt = $conn->prepare("DELETE FROM usuarios WHERE dni = :dni");
+        $stmt->bindParam(':dni', $dni);
+        
+        $stmt->execute();
+    }
+    
+    
 }
 
 ?>
