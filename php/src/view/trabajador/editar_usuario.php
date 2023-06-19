@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Editar Usuario</title>
-    <link rel="stylesheet" href="../../css1/prestamos.css">
+    <link rel="stylesheet" href="../../css1/usuariosedit.css">
 </head>
 <body>
     <div class="container">
@@ -38,6 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="text" id="email" name="email" value="<?= $usuario->getEmail() ?>">
             <input type="submit" value="Guardar">
         </form>
+        <a href="prestamos.php" class="button-back">Regresar</a>
     </div>
 </body>
 </html>

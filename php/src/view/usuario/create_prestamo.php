@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Solicitar préstamo</title>
-    <link rel="stylesheet" href="../../css1/fuente.css">
+    <link rel="stylesheet" href="../../css1/create.css">
 </head>
 <body>
     <div class="container">

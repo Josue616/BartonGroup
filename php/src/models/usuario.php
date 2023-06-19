@@ -112,8 +112,6 @@ class Usuario {
         
         $stmt->execute();
     }
-    
-    
 }
 
 ?>

@@ -5,14 +5,15 @@ if (!isset($_SESSION['dni']) || $_SESSION['user_type'] !== 'trabajador') {
     header("Location: ../../index.php");
     exit();
 }
-
 $dni = $_SESSION['dni'];
-
 require_once '../../models/usuario.php';
 $trabajador = Usuario::findByDNI($dni);
 require_once '../../models/prestamo.php';
 $prestamos = Prestamo::findAll();
-
+if (isset($_GET['dni_buscar']) && !empty(trim($_GET['dni_buscar']))) {
+    $dni_buscar = $_GET['dni_buscar'];
+    $prestamos = Prestamo::findByDniP($dni_buscar);
+}
 ?>
 
 <!DOCTYPE html>
@@ -42,6 +43,13 @@ $prestamos = Prestamo::findAll();
         </div>
         <div class="main-content">
             <h2>Prestamos solicitados</h2>
+            <form method="GET">
+                <input type="text" name="dni_buscar" placeholder="Buscar por DNI">
+                <input type="submit" value="Buscar">
+            </form>
+            <br>
+            <a href="exportar.php" class="btn btn-default">Descargar CSV</a>
+            <br>
             <table>
                 <tr>
                     <th style="display:none;">ID</th>
