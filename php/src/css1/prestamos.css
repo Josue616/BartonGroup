@@ -80,3 +80,56 @@ tr:nth-child(even) {
     padding: 1rem;
     border: 1px solid #f5c6cb;
 }
+.search-download-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* esto asegura que los elementos estén alineados verticalmente */
+    margin-bottom: 1rem; /* espacio debajo del wrapper */
+}
+td a {
+    display: inline-block;
+    background-color: #007BFF;
+    color: #FFFFFF;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin: 2px;
+    transition: background-color 0.3s ease;
+}
+
+td a:hover {
+    background-color: #0056b3;
+}
+
+/* Puedes usar diferentes colores para diferentes acciones */
+td a:nth-child(2) {
+    background-color: #28a745;
+}
+
+td a:nth-child(2):hover {
+    background-color: #1e7e34;
+}
+
+td a:nth-child(3) {
+    background-color: #dc3545;
+}
+
+td a:nth-child(3):hover {
+    background-color: #c82333;
+}
+
+td a:nth-child(4) {
+    background-color: #ffc107;
+}
+
+td a:nth-child(4):hover {
+    background-color: #e0a800;
+}
+
+td a:nth-child(5) {
+    background-color: #17a2b8;
+}
+
+td a:nth-child(5):hover {
+    background-color: #138496;
+}

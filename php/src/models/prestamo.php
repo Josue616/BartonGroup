@@ -164,6 +164,30 @@ class Prestamo {
     );
 
     return $prestamo;
+    }
+public static function findByDniP($dni) {
+    $conn = getConnection();
+
+    $stmt = $conn->prepare("SELECT * FROM prestamos WHERE dni_usuario = :dni");
+    $stmt->bindParam(':dni', $dni);
+    $stmt->execute();
+
+    $result = array();
+    while ($row = $stmt->fetch()) {
+        $prestamo = new Prestamo(
+            $row['id'],
+            $row['codigo_prestamo'],
+            $row['monto'],
+            $row['tasa'],
+            $row['frecuencia'],
+            $row['dni_usuario'],
+            $row['estado']
+        );
+        $result[] = $prestamo;
+    }
+
+    return $result;
 }
+
 }
 ?>
