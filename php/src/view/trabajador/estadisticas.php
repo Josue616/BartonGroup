@@ -104,6 +104,8 @@
             }
         });
     </script>
-
+    <div style="text-align: center; margin: 1rem;">
+        <a href="prestamos.php" style="text-decoration: none; color: #333333;">Volver</a>
+    </div>
 </body>
 </html>
