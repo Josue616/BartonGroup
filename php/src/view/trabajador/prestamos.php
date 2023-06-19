@@ -1,29 +1,17 @@
 <?php
 session_start();
 
-// Verificar si el usuario está autenticado y es un trabajador
 if (!isset($_SESSION['dni']) || $_SESSION['user_type'] !== 'trabajador') {
     header("Location: ../../index.php");
     exit();
 }
 
-// Recuperar el DNI del usuario de la sesión
 $dni = $_SESSION['dni'];
 
-// Buscar al usuario en la base de datos
 require_once '../../models/usuario.php';
 $trabajador = Usuario::findByDNI($dni);
-
-// Buscar todos los préstamos en la base de datos
 require_once '../../models/prestamo.php';
 $prestamos = Prestamo::findAll();
-
-
-if (isset($_GET['dni_buscar']) && !empty(trim($_GET['dni_buscar']))) {
-    $dni_buscar = $_GET['dni_buscar'];
-    $prestamos = Prestamo::findByDniP($dni_buscar);
-}
-
 
 ?>
 
@@ -47,20 +35,13 @@ if (isset($_GET['dni_buscar']) && !empty(trim($_GET['dni_buscar']))) {
                 <ul>
                     <li><a href="menu.php">Menú</a></li>
                     <li><a href="estadisticas.php">Estadísticas</a></li>
+                    <li><a href="total_usuarios.php">Usuarios</a></li>
                     <li><a href="logout.php">Cerrar sesión</a></li>
                 </ul>
             </div>
         </div>
         <div class="main-content">
             <h2>Prestamos solicitados</h2>
-
-            <form method="GET">
-                <input type="text" name="dni_buscar" placeholder="Buscar por DNI">
-                <input type="submit" value="Buscar">
-            </form>
-            <br>
-            <a href="exportar.php" class="btn btn-default">Descargar CSV</a>
-            <br>
             <table>
                 <tr>
                     <th style="display:none;">ID</th>
@@ -84,8 +65,8 @@ if (isset($_GET['dni_buscar']) && !empty(trim($_GET['dni_buscar']))) {
                         <td><?= $prestamo->getCodigo() ?></td>
                         <td><?= $prestamo->getMonto() ?></td>
                         <td><?= $prestamo->getTasa() ?> %</td>
-                        <td><?= $prestamo->getFrecuencia() ?> meses</td>
-                        <td><?= $dni_solicitante ?> (<?= $correo_solicitante ?>)</td>
+                        <td><?= $prestamo->getFrecuencia() ?></td>
+                        <td><?= $prestamo->getDni() ?></td>
                         <td><?= $prestamo->getEstado() ?></td>
                         <td>
                             <a href="export_word.php?codigo=<?= $prestamo->getCodigo() ?>&monto=<?= $prestamo->getMonto() ?>&tasa=<?= $prestamo->getTasa() ?>&frecuencia=<?= $prestamo->getFrecuencia() ?>&dni=<?= $prestamo->getDni() ?>&estado=<?= $prestamo->getEstado() ?>">Exportar a Word</a>
@@ -97,7 +78,10 @@ if (isset($_GET['dni_buscar']) && !empty(trim($_GET['dni_buscar']))) {
                     </tr>
                 <?php endforeach; ?>
             </table>
+
+
         </div>
     </div>
 </body>
 </html>
+
