@@ -13,9 +13,8 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if ($user && password_verify($password, $user['password'])) {
     session_start();
-    $_SESSION['dni'] = $user['dni']; // Almacenar el DNI del usuario en la sesión
+    $_SESSION['dni'] = $user['dni'];
     
-    // Verificar si el usuario es un trabajador o no
     if ($user['es_trabajador'] == 1) {
         $_SESSION['user_type'] = 'trabajador';
         header("Location: view/trabajador/prestamos.php");

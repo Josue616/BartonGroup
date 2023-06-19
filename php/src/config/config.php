@@ -1,7 +1,7 @@
 <?php
-$servername = "localhost";
-$username = "cotrina";
-$password = "123";
+$servername = "db";
+$username = "root";
+$password = "";
 $dbname = "prestamos_db";
 
 try {
@@ -12,9 +12,9 @@ try {
 }
 function getConnection()
 {
-    $servername = "localhost";
-    $username = "cotrina";
-    $password = "123";
+    $servername = "db";
+    $username = "root";
+    $password = "";
     $dbname = "prestamos_db";
 
     try {

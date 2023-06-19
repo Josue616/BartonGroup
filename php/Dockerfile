@@ -6,6 +6,8 @@ RUN apt-get update \
         zip \
         libzip-dev \
         unzip \
+        python3 \
+        python3-pip \
     && docker-php-ext-install \
         zip \
         mysqli \

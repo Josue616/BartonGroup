@@ -39,6 +39,7 @@ $prestamos = Prestamo::findAll();
             <div class="nav">
                 <ul>
                     <li><a href="menu.php">Menú</a></li>
+                    <li><a href="estadisticas.php">Estadísticas</a></li>
                     <li><a href="logout.php">Cerrar sesión</a></li>
                 </ul>
             </div>
@@ -54,8 +55,15 @@ $prestamos = Prestamo::findAll();
                     <th>Frecuencia</th>
                     <th>DNI del solicitante</th>
                     <th>Estado</th>
+                    <th>Acciones</th>
                 </tr>
-                <?php foreach ($prestamos as $prestamo): ?>
+                <?php foreach ($prestamos as $prestamo): 
+                    $dni_solicitante = $prestamo->getDni();
+
+                    $solicitante = Usuario::findByDNI($dni_solicitante);
+                
+                    $correo_solicitante = $solicitante->getEmail();
+                ?>
                     <tr>
                         <td style="display:none;"><?= $prestamo->getId() ?></td>
                         <td><?= $prestamo->getCodigo() ?></td>
@@ -64,12 +72,18 @@ $prestamos = Prestamo::findAll();
                         <td><?= $prestamo->getFrecuencia() ?></td>
                         <td><?= $prestamo->getDni() ?></td>
                         <td><?= $prestamo->getEstado() ?></td>
-                        <td><a href="export_word.php?codigo=<?= $prestamo->getCodigo() ?>&monto=<?= $prestamo->getMonto() ?>&tasa=<?= $prestamo->getTasa() ?>&frecuencia=<?= $prestamo->getFrecuencia() ?>&dni=<?= $prestamo->getDni() ?>&estado=<?= $prestamo->getEstado() ?>">Exportar a Word</a></td>
-                        <td><a href="aprobacion_prestamo.php?id=<?= $prestamo->getId() ?>">Aprobar</a></td>
-			<td><a href="desaprobacion_prestamo.php?id=<?= $prestamo->getId() ?>">Rechazar</a></td>
+                        <td>
+                            <a href="export_word.php?codigo=<?= $prestamo->getCodigo() ?>&monto=<?= $prestamo->getMonto() ?>&tasa=<?= $prestamo->getTasa() ?>&frecuencia=<?= $prestamo->getFrecuencia() ?>&dni=<?= $prestamo->getDni() ?>&estado=<?= $prestamo->getEstado() ?>">Exportar a Word</a>
+                            <a href="export_contrato.php?codigo=<?= $prestamo->getCodigo() ?>&monto=<?= $prestamo->getMonto() ?>&tasa=<?= $prestamo->getTasa() ?>&frecuencia=<?= $prestamo->getFrecuencia() ?>&dni=<?= $prestamo->getDni() ?>&estado=<?= $prestamo->getEstado() ?>">Exportar Contrato</a>
+                            <a href="aprobacion_prestamo.php?id=<?= $prestamo->getId() ?>">Aprobar</a>
+                            <a href="desaprobacion_prestamo.php?id=<?= $prestamo->getId() ?>">Rechazar</a>
+                            <a href="enviar_notificacion.php?correo=<?= $correo_solicitante ?>">Enviar Notificación</a>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </table>
+
+
         </div>
     </div>
 </body>

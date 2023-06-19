@@ -1,6 +1,5 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    // Recuperar los parámetros de la URL
     $codigo = $_GET['codigo'];
     $monto = $_GET['monto'];
     $tasa = $_GET['tasa'];
