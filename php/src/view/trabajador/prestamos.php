@@ -34,7 +34,7 @@ if (isset($_GET['dni_buscar']) && !empty(trim($_GET['dni_buscar']))) {
             </div>
             <div class="nav">
                 <ul>
-                    <li><a href="menu.php">Menú</a></li>
+                    <li><a href="prestamos.php">Menú</a></li>
                     <li><a href="estadisticas.php">Estadísticas</a></li>
                     <li><a href="total_usuarios.php">Usuarios</a></li>
                     <li><a href="logout.php">Cerrar sesión</a></li>

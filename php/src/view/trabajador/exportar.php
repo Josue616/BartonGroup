@@ -13,7 +13,7 @@ header("Content-Disposition: attachment; filename=prestamos_{$dni}.csv");
 $output = fopen('php://output', 'w');
 
 // Puedes añadir los encabezados de las columnas si quieres
-fputcsv($output, array('ID', 'Código', 'Monto', 'Tasa', 'Frecuencia', 'DNI', 'Estado'));
+fputcsv($output, array('ID', 'Codigo', 'Monto', 'Tasa', 'Frecuencia', 'DNI', 'Estado'));
 
 foreach ($prestamos as $prestamo) {
     fputcsv($output, array(
